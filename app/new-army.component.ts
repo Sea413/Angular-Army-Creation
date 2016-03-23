@@ -15,15 +15,15 @@ import {Army} from './army.model';
   `
 })
 export class NewArmyComponent {
-  public onSubmitNewArmy: EventEmitter<String[]>;
+  public onSubmitNewArmy: EventEmitter<Army>;
   constructor(){
     this.onSubmitNewArmy = new EventEmitter();
   }
   addArmy(userunitName: HTMLInputElement, usergeneralName: HTMLInputElement, userunitSize: HTMLInputElement){
-    var emptyArmy = [];
-    var tempArmy = new Army(userunitName.value,usergeneralName.value,userunitSize.value, 0)
-    emptyArmy.push(tempArmy);
-    this.onSubmitNewArmy.emit(emptyArmy);
+    // var emptyArmy = [];
+    var tempArmy = new Army(userunitName.value,usergeneralName.value,parseInt(userunitSize.value), 0)
+    // emptyArmy.push(tempArmy);
+    this.onSubmitNewArmy.emit(tempArmy);
     userunitName.value = "";
     usergeneralName.value = "";
     userunitSize.value = "";

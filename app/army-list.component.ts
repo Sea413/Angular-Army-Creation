@@ -4,20 +4,25 @@ import { Army } from './army.model';
 import { EditArmyDetailsComponent } from './edit-army-details.component';
 import { NewArmyComponent } from './new-army.component';
 import {DonePipe} from './done.pipe';
+import {RetiredPipe} from './retired.pipe';
 
 @Component({
   selector: 'army-list',
   inputs: ['armyList'],
   outputs: ['onArmySelect'],
-  pipes: [DonePipe],
+  pipes: [RetiredPipe, DonePipe],
   directives: [ArmyComponent, EditArmyDetailsComponent, NewArmyComponent],
   template: `
   <select (change)="onChange($event.target.value)">
     <option value="all">Show All</option>
     <option value="broken">Show Broken</option>
-    <option value="notBroken" selected="selected">Not Broken</option>
+    <option value="notBroken">Not Broken</option>
+    <option value="armySort">Sort by Size</option>
+    // Investigate later to see if selected makes a difference
+    <option value="retired">Retired General</option>
+    <option value="notRetired" selected="selected"> Still in service!</option>
   </select>
-  <army-display *ngFor="#currentArmy of armyList | broken:filterBroken"
+  <army-display *ngFor="#currentArmy of armyList | retired:filterRetired | broken:filterBroken"
     (click)="armyClicked(currentArmy)"
     [class.selected]="currentArmy === selectedArmy"
     [army]="currentArmy">
@@ -31,6 +36,7 @@ export class ArmyListComponent {
   public armyList: Army[];
   public onArmySelect: EventEmitter<Army>;
   public selectedArmy: Army;
+  public filterRetired: string = "notRetired";
   public filterBroken: string = "notBroken";
   constructor() {
     this.onArmySelect = new EventEmitter();
@@ -39,12 +45,11 @@ export class ArmyListComponent {
     this.selectedArmy = clickedArmy;
     this.onArmySelect.emit(clickedArmy);
   }
-  createArmy(tempArmy: string): void {
-    this.armyList.push(
-      new Army(tempArmy[0].unitName, tempArmy[0].unitGeneral, tempArmy[0].unitSize, this.armyList.length)
-    );
+  createArmy(tempArmy: Army): void {
+    this.armyList.push(tempArmy);
   }
   onChange(filterOption) {
+    this.filterRetired = filterOption;
     this.filterBroken = filterOption;
   }
 }

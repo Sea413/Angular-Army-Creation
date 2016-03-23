@@ -20,7 +20,7 @@ export class AppComponent {
   constructor(){
     this.armies = [
       new Army("Jimmies Jamboree", "Jimmy", 660, 0),
-      new Army("Green Salamanders", "Ender Wiggins", 1337,1),
+      new Army("Green Salamanders", "Ender Wiggins", 8,1),
       new Army("Army of Men","Aragorn", 5000,2),
       new Army("Jerry Cool Men","Jerry", 123,3)
     ];
