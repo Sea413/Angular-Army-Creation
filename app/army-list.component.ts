@@ -17,7 +17,6 @@ import {RetiredPipe} from './retired.pipe';
     <option value="all">Show All</option>
     <option value="broken">Show Broken</option>
     <option value="notBroken">Not Broken</option>
-    <option value="armySort">Sort by Size</option>
     // Investigate later to see if selected makes a difference
     <option value="retired">Retired General</option>
     <option value="notRetired" selected="selected"> Still in service!</option>

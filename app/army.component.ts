@@ -12,8 +12,8 @@ import { Army } from './army.model';
     <label>Unit Name: {{ army.unitName }}</label>
     <label>Unit Name: {{ army.unitGeneral }}</label>
     <label>Unit Size: {{ army.unitSize }}</label>
-    <button (click)="testing(army.unitSize-10)"> Sue for Peace</button>
-    <button (click)="testing(army.unitSize+50)">Marshal for War</button>
+    <button (click)="changeUnit(army.unitSize-10)"> Sue for Peace</button>
+    <button (click)="changeUnit(army.unitSize+50)">Marshal for War</button>
   </div>
   `
   })
@@ -22,7 +22,7 @@ import { Army } from './army.model';
     toggleRetired(setState: boolean){
       this.army.retired = setState;
     }
-    testing(setUnit: number): void{
+    changeUnit(setUnit: number): void{
       this.army.unitSize= setUnit;
     }
   }
