@@ -1,7 +1,7 @@
 import { Component, EventEmitter } from 'angular2/core';
 import { ArmyComponent } from './army.component';
 import { Army } from './army.model';
-import { EditArmyDetailsComponent } from './edit-army-details.component';
+import { InvasionComponent } from './invasion.component';
 import { NewArmyComponent } from './new-army.component';
 import {DonePipe} from './done.pipe';
 import {RetiredPipe} from './retired.pipe';
@@ -11,7 +11,7 @@ import {RetiredPipe} from './retired.pipe';
   inputs: ['armyList'],
   outputs: ['onArmySelect'],
   pipes: [RetiredPipe, DonePipe],
-  directives: [ArmyComponent, EditArmyDetailsComponent, NewArmyComponent],
+  directives: [ArmyComponent, InvasionComponent, NewArmyComponent],
   template: `
   <select (change)="onChange($event.target.value)">
     <option value="all">Show All</option>
@@ -25,9 +25,10 @@ import {RetiredPipe} from './retired.pipe';
     [class.selected]="currentArmy === selectedArmy"
     [army]="currentArmy">
   </army-display>
-  <edit-army-details *ngIf="selectedArmy" [army]="selectedArmy">
-  </edit-army-details>
+  <invasion *ngIf="selectedArmy" [army]="selectedArmy" [armyList]="armyList">
+  </invasion>
   <new-army (onSubmitNewArmy)="createArmy($event)"></new-army>
+  <img src="../img/risk-colored-small.jpg" alt="Risk Map">
   `
 })
 export class ArmyListComponent {
@@ -42,7 +43,7 @@ export class ArmyListComponent {
   armyClicked(clickedArmy: Army): void {
     this.selectedArmy = clickedArmy;
     this.onArmySelect.emit(clickedArmy);
-  }
+}
   createArmy(tempArmy: Army): void {
     this.armyList.push(tempArmy);
   }

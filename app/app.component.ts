@@ -19,14 +19,14 @@ export class AppComponent {
   public armies: Army[];
   constructor(){
     this.armies = [
-      new Army(1,"Jimmies Jamboree", "Jimmy", 660, 0),
-      new Army(1,"Green Salamanders", "Ender Wiggins", 8,1),
-      new Army(2,"Army of Men","Aragorn", 5000,2),
-      new Army(2,"Jerry Cool Men","Jerry", 123,3)
+      new Army(1,"Jimmies Jamboree","Jimmy", 660,"North America", 0),
+      new Army(1,"Green Salamanders","Ender Wiggins",8,"Asia",1),
+      new Army(2,"Army of Men","Aragorn", 5000,"Asia",2),
+      new Army(2,"Jerry Cool Men","Jerry", 123,"Europe",3)
     ];
     console.log(this.armies);
   }
-  taskWasSelected(clickedArmy: Army): void {
+  armyWasSelected(clickedArmy: Army): void {
     console.log('parent', clickedArmy);
   }
 }
