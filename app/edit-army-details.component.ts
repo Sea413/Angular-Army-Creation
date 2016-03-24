@@ -7,12 +7,17 @@ import {Army} from './army.model';
   template: `
     <div class="army-form">
       <h3>Edit Unit Name: </h3>
-      <input [(ngModel)]="army.unitName" class="col-sm-8 input-lg army-form"/>
-      <h3>Edit General Name: </h3>
-      <input [(ngModel)]="army.generalName" class="col-sm-8 input-lg army-form"/>
+      <img (click)="modifyMap(army.unitSize-200)" src="../img/risk-colored-small.jpg" alt="Risk Map">
+
     </div>
   `
 })
 export class EditArmyDetailsComponent {
-  public army: Army;
+public army: Army;
+modifyMap(setUnit: number): void {
+  this.army.unitSize= setUnit;
+  if(setUnit < 11){
+    this.army.broken =true;
+  }
+}
 }

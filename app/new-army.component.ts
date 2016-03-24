@@ -7,10 +7,11 @@ import {Army} from './army.model';
   template: `
   <div class="army-form">
     <h3>Create Army:</h3>
+    <input placeholder="player" class="col-sm-8 input-lg" #newplayer>
     <input placeholder="unitName" class="col-sm-8 input-lg" #newunitName>
     <input placeholder="generalName" class="col-sm-8 input-lg" #newgeneralName>
     <input type="number" placeholder="unitSize" class="col-sm-8 input-lg" #newunitSize>
-    <button (click)="addArmy(newunitName,newgeneralName,newunitSize)">Add</button>
+    <button (click)="addArmy(newplayer,newunitName,newgeneralName,newunitSize)">Add</button>
   </div>
   `
 })
@@ -19,9 +20,9 @@ export class NewArmyComponent {
   constructor(){
     this.onSubmitNewArmy = new EventEmitter();
   }
-  addArmy(userunitName: HTMLInputElement, usergeneralName: HTMLInputElement, userunitSize: HTMLInputElement){
+  addArmy(player: HTMLInputElement,userunitName: HTMLInputElement, usergeneralName: HTMLInputElement, userunitSize: HTMLInputElement){
     // var emptyArmy = [];
-    var tempArmy = new Army(userunitName.value,usergeneralName.value,parseInt(userunitSize.value), 0)
+    var tempArmy = new Army(parseInt(player.value),userunitName.value,usergeneralName.value,parseInt(userunitSize.value), 0)
     // emptyArmy.push(tempArmy);
     this.onSubmitNewArmy.emit(tempArmy);
     userunitName.value = "";

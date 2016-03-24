@@ -9,10 +9,11 @@ import { Army } from './army.model';
     <input *ngIf ="!army.retired && army.unitSize <11" type= "checkbox" (click)="toggleRetired(true)" />
     <input *ngIf="army.retired && army.unitSize <11" type="checkbox" checked (click)="toggleRetired(false)" />
 
-    <label>Unit Name: {{ army.unitName }}</label>
-    <label>Unit Name: {{ army.unitGeneral }}</label>
+    <label>Player Assignment:{{army.player}}</label>
+    <label>Unit Name: {{ army.unitName }},</label>
+    <label>General Name: {{ army.unitGeneral }},</label>
     <label>Unit Size: {{ army.unitSize }}</label>
-    <button (click)="changeUnit(army.unitSize-10)"> Sue for Peace</button>
+    <button (click)="changeUnit(army.unitSize-10)">Sue for Peace</button>
     <button (click)="changeUnit(army.unitSize+50)">Marshal for War</button>
   </div>
   `
@@ -22,7 +23,13 @@ import { Army } from './army.model';
     toggleRetired(setState: boolean){
       this.army.retired = setState;
     }
-    changeUnit(setUnit: number): void{
+    changeUnit(setUnit: number): void {
       this.army.unitSize= setUnit;
+      if(setUnit < 11){
+        this.army.broken =true;
+      }
+      else if(setUnit > 11){
+        this.army.broken =false;
+      }
     }
   }
